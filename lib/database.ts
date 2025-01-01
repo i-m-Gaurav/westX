@@ -1,23 +1,20 @@
 import mongoose from 'mongoose';
 
-let isConnected = false; // track the connection
+let isConnected = false;
 
 export const connectToDB = async () => {
-  mongoose.set('strictQuery', true);
-
   if (isConnected) {
-    console.log('MongoDB is already connected');
+    console.log('Using existing database connection');
     return;
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI as string, {
-      dbName: "westx",
-    });
-
+    const db = await mongoose.connect(process.env.MONGODB_URI as string);
     isConnected = true;
-    console.log('MongoDB connected');
+    console.log('New database connection established');
+    return db;
   } catch (error) {
-    console.log(error);
+    console.error('Error connecting to database:', error);
+    throw error;
   }
 };
