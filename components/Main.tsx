@@ -5,7 +5,7 @@ import RightSidebar from "@/components/RightSidebar";
 export default function Main() {
   return (
     <>
-      <div className="flex justify-space-center">
+      <div className="flex justify-center">
         <Sidebar />
         <MainFeed />
         <RightSidebar />
